@@ -1,0 +1,161 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold fs-3" href="/">
+      <i class="fas fa-blog me-2 text-primary"></i>Blogify
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active px-3 py-2 me-2" aria-current="page" href="/">
+            <i class="fas fa-home me-1"></i>Home
+          </a>
+        </li>
+      <% if(locals.user){ %>
+          <li class="nav-item">
+            <a class="nav-link px-3 py-2 me-2" href="/blog/add-new">
+              <i class="fas fa-plus-circle me-1"></i>Add Blog
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-3 py-2 me-2 d-flex align-items-center" 
+               href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <div class="user-avatar me-2">
+                 <i class="fas fa-user"></i>
+               </div>
+               <%= locals.user.fullname || 'User' %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="/user/logout">
+                  <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </a>
+              </li>
+            </ul>
+          </li>
+        <% }else{ %>
+          <li class="nav-item">
+            <a class="nav-link px-3 py-2 me-2" href="/user/signup">
+              <i class="fas fa-user-plus me-1"></i>Create Account
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3 py-2 btn btn-outline-primary" href="/user/signin">
+              <i class="fas fa-sign-in-alt me-1"></i>Sign In
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<% if(locals.error){ %>
+  <div class="container mt-3">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <i class="fas fa-exclamation-triangle me-2"></i>
+      <strong>Error:</strong> <%= locals.error %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+<% } %>
+
+<style>
+/* Navbar Styling */
+.navbar-brand {
+  color: #fff !important;
+}
+
+.navbar-brand:hover {
+  color: #f8f9fa !important;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.nav-link {
+  color: #fff !important;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff !important;
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: #fff !important;
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.dropdown-item {
+  padding: 8px 16px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+  background: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+/* Alert Styling */
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+  border-left: 4px solid #dc3545;
+  border-radius: 4px;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+    padding-top: 1rem;
+  }
+  
+  .nav-item {
+    margin-bottom: 0.5rem;
+  }
+}
+</style>
